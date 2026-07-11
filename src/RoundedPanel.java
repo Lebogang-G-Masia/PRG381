@@ -13,7 +13,7 @@ public class RoundedPanel extends JPanel {
         this.cornerRadius = radius;
         this.backgroundColor = bgColor;
         this.isGlass = isGlass;
-        setOpaque(false); // Crucial: Allows the background behind the corners to show
+        setOpaque(false); 
     }
 
     @Override
@@ -21,14 +21,11 @@ public class RoundedPanel extends JPanel {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g.create();
         
-        // Turn on Anti-aliasing for smooth, pixel-perfect curved edges
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
         if (isGlass) {
-            // Glassmorphism: Semi-transparent white
             g2.setColor(new Color(255, 255, 255, 60)); 
         } else {
-            // Solid color
             g2.setColor(backgroundColor);
         }
         
