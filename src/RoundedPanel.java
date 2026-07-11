@@ -24,7 +24,7 @@ public class RoundedPanel extends JPanel {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
         if (isGlass) {
-            g2.setColor(new Color(255, 255, 255, 60)); 
+            g2.setColor(new Color(0, 0, 0, 70)); 
         } else {
             g2.setColor(backgroundColor);
         }
