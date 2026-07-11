@@ -13,6 +13,11 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import java.awt.Color;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import javax.swing.BorderFactory;
+
 public class LoginFrame extends javax.swing.JFrame {
 
     /**
@@ -20,6 +25,7 @@ public class LoginFrame extends javax.swing.JFrame {
      */
     public LoginFrame() {
         initComponents();
+        setupBaseLayout();
     }
 
     /**
@@ -59,7 +65,42 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
     }
+    private void setupBaseLayout() {
+        // 1. Frame settings
+        setTitle("University Cleaning Inventory System");
+        setSize(1100, 700);
+        setLocationRelativeTo(null); // Center the window on the screen
+        
+        // Split the frame perfectly in half (1 row, 2 columns)
+        getContentPane().setLayout(new GridLayout(1, 2));
 
+        // --- LEFT SIDE (Gradient & Glass Card) ---
+        // Make sure the image name matches what you uploaded to your assets folder!
+        ImagePanel leftPanel = new ImagePanel("/assets/bg_gradient.jpeg");
+        leftPanel.setLayout(new GridBagLayout()); // GridBagLayout centers components easily
+        
+        // Create the Glass Card
+        RoundedPanel glassCard = new RoundedPanel(30, Color.WHITE, true);
+        glassCard.setPreferredSize(new java.awt.Dimension(400, 400));
+        leftPanel.add(glassCard); // Add glass card to the center of the left panel
+
+
+        // --- RIGHT SIDE (Solid Background & Login Card) ---
+        javax.swing.JPanel rightPanel = new javax.swing.JPanel();
+        rightPanel.setBackground(new Color(250, 250, 251)); // The #FAFAFB light grey
+        rightPanel.setLayout(new GridBagLayout()); 
+        
+        // Create the Solid White Login Card
+        RoundedPanel loginCard = new RoundedPanel(20, Color.WHITE, false);
+        loginCard.setPreferredSize(new java.awt.Dimension(450, 550));
+        // Optional: Adding a subtle border since we can't do blurred drop shadows easily
+        loginCard.setBorder(BorderFactory.createLineBorder(new Color(230, 230, 230), 1)); 
+        rightPanel.add(loginCard);
+
+        // 2. Add both halves to the main frame
+        getContentPane().add(leftPanel);
+        getContentPane().add(rightPanel);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }
