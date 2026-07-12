@@ -32,10 +32,9 @@ public class LoginFrame extends javax.swing.JFrame {
         RoundedPanel wrapper = new RoundedPanel(15, Color.WHITE, false);
         wrapper.setLayout(new java.awt.BorderLayout(10, 0)); 
         
-        wrapper.setBorder(javax.swing.BorderFactory.createCompoundBorder(
-            javax.swing.BorderFactory.createLineBorder(new Color(210, 210, 210), 1),
-            javax.swing.BorderFactory.createEmptyBorder(8, 12, 8, 12)
-        ));
+        wrapper.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 12, 8, 12));
+        
+        wrapper.setCustomBorder(new Color(210, 210, 210), 1);
         wrapper.setPreferredSize(new java.awt.Dimension(300, 45));
 
         javax.swing.JLabel iconLabel = new javax.swing.JLabel();
@@ -156,7 +155,8 @@ public class LoginFrame extends javax.swing.JFrame {
         
         RoundedPanel loginCard = new RoundedPanel(20, Color.WHITE, false);
         loginCard.setPreferredSize(new java.awt.Dimension(450, 550));
-        loginCard.setBorder(BorderFactory.createLineBorder(new Color(230, 230, 230), 1)); 
+        loginCard.setBorder(javax.swing.BorderFactory.createEmptyBorder()); 
+        loginCard.setCustomBorder(new Color(230, 230, 230), 1);
         rightPanel.add(loginCard);
         
 
