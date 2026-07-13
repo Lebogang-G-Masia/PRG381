@@ -16,7 +16,9 @@ public class CleanerRecord {
     }
 
     @Override
-    public String toString() {
-        return name;
+    return String.format("Cleaner Record {\n" +
+                    "\t ID: %d,\n" +
+                    "\t Name: %s\n" +
+                    "}", this.id, this.name);
     }
 }
