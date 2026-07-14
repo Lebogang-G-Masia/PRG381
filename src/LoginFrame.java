@@ -27,6 +27,43 @@ public class LoginFrame extends javax.swing.JFrame {
         initComponents();
         setupBaseLayout();
     }
+    
+    private javax.swing.JPanel createIconTextField(String iconPath, String placeholderText, boolean isPassword) {
+        RoundedPanel wrapper = new RoundedPanel(15, Color.WHITE, false);
+        wrapper.setLayout(new java.awt.BorderLayout(10, 0)); 
+        
+        wrapper.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 12, 8, 12));
+        
+        wrapper.setCustomBorder(new Color(210, 210, 210), 1);
+        wrapper.setPreferredSize(new java.awt.Dimension(300, 45));
+
+        javax.swing.JLabel iconLabel = new javax.swing.JLabel();
+        java.net.URL imgUrl = getClass().getResource(iconPath);
+        if (imgUrl != null) {
+            java.awt.Image originalImg = new javax.swing.ImageIcon(imgUrl).getImage();
+            // Scale to 20x20 pixels for the text fields
+            java.awt.Image scaledImg = originalImg.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
+            iconLabel.setIcon(new javax.swing.ImageIcon(scaledImg));
+        }
+        wrapper.add(iconLabel, java.awt.BorderLayout.WEST);
+
+        javax.swing.JTextField textField;
+        if (isPassword) {
+            textField = new javax.swing.JPasswordField();
+        } else {
+            textField = new javax.swing.JTextField();
+        }
+        
+        textField.setBorder(null);
+        textField.setOpaque(false);
+        textField.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 14));
+        textField.putClientProperty("JTextField.placeholderText", placeholderText);
+        
+        wrapper.add(textField, java.awt.BorderLayout.CENTER);
+
+        return wrapper;
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,6 +111,41 @@ public class LoginFrame extends javax.swing.JFrame {
         leftPanel.setLayout(new GridBagLayout());
         RoundedPanel glassCard = new RoundedPanel(30, Color.WHITE, true);
         glassCard.setPreferredSize(new java.awt.Dimension(400, 400));
+        
+        
+        glassCard.setLayout(new GridBagLayout()); 
+        java.awt.GridBagConstraints gbc = new java.awt.GridBagConstraints();
+        gbc.gridwidth = java.awt.GridBagConstraints.REMAINDER; 
+        gbc.anchor = java.awt.GridBagConstraints.CENTER; 
+        gbc.insets = new java.awt.Insets(15, 0, 30, 0);
+
+        javax.swing.JLabel leafIcon = new javax.swing.JLabel();
+        java.net.URL leafUrl = getClass().getResource("/assets/icon_leaf.png");
+        if (leafUrl != null) {
+            java.awt.Image originalLeaf = new javax.swing.ImageIcon(leafUrl).getImage();
+            
+            leafIcon.setIcon(new RoundedIcon(originalLeaf, 100, 100, 15));
+        }
+        glassCard.add(leafIcon, gbc);
+
+        javax.swing.JLabel headingLabel = new javax.swing.JLabel("Clarity & Efficiency");
+        headingLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 28));
+        headingLabel.setForeground(Color.WHITE);
+        glassCard.add(headingLabel, gbc);
+
+        javax.swing.JLabel subLabel1 = new javax.swing.JLabel("A streamlined ecosystem for inventory management");
+        subLabel1.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 16));
+        subLabel1.setForeground(new Color(230, 230, 230));
+        glassCard.add(subLabel1, gbc);
+
+        gbc.insets = new java.awt.Insets(5, 0, 15, 0); 
+
+//        javax.swing.JLabel subLabel2 = new javax.swing.JLabel("management.");
+//        subLabel2.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 14));
+//        subLabel2.setForeground(new Color(230, 230, 230));
+//        glassCard.add(subLabel2, gbc);
+        
+        
         leftPanel.add(glassCard); 
 
 
@@ -83,8 +155,62 @@ public class LoginFrame extends javax.swing.JFrame {
         
         RoundedPanel loginCard = new RoundedPanel(20, Color.WHITE, false);
         loginCard.setPreferredSize(new java.awt.Dimension(450, 550));
-        loginCard.setBorder(BorderFactory.createLineBorder(new Color(230, 230, 230), 1)); 
+        loginCard.setBorder(javax.swing.BorderFactory.createEmptyBorder()); 
+        loginCard.setCustomBorder(new Color(230, 230, 230), 1);
         rightPanel.add(loginCard);
+        
+
+        loginCard.setLayout(new java.awt.GridBagLayout());
+        java.awt.GridBagConstraints cardGbc = new java.awt.GridBagConstraints();
+        cardGbc.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        
+        cardGbc.anchor = java.awt.GridBagConstraints.CENTER;
+        cardGbc.insets = new java.awt.Insets(40, 0, 15, 0); 
+        
+        cardGbc.anchor = java.awt.GridBagConstraints.CENTER;
+        cardGbc.insets = new java.awt.Insets(40, 0, 15, 0); 
+        
+        javax.swing.JLabel boxIcon = new javax.swing.JLabel();
+        java.net.URL boxUrl = getClass().getResource("/assets/icon_box.png");
+        if (boxUrl != null) {
+            java.awt.Image originalBox = new javax.swing.ImageIcon(boxUrl).getImage();
+            
+            boxIcon.setIcon(new RoundedIcon(originalBox, 100, 100, 15));
+        }
+        loginCard.add(boxIcon, cardGbc);
+        
+        cardGbc.insets = new java.awt.Insets(0, 0, 5, 0); // 5px bottom padding
+        javax.swing.JLabel welcomeLabel = new javax.swing.JLabel("Welcome Back");
+        welcomeLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 22));
+        welcomeLabel.setForeground(new Color(40, 40, 40));
+        loginCard.add(welcomeLabel, cardGbc);
+
+        cardGbc.insets = new java.awt.Insets(0, 0, 35, 0); // 35px space before inputs
+        javax.swing.JLabel systemLabel = new javax.swing.JLabel("University Cleaning Inventory & Issuance System");
+        systemLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 12));
+        systemLabel.setForeground(new Color(120, 120, 120));
+        loginCard.add(systemLabel, cardGbc);
+
+        cardGbc.anchor = java.awt.GridBagConstraints.WEST;
+        cardGbc.insets = new java.awt.Insets(0, 50, 5, 50);
+        
+        javax.swing.JLabel userLabel = new javax.swing.JLabel("Username");
+        userLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 12));
+        userLabel.setForeground(new Color(80, 80, 80));
+        loginCard.add(userLabel, cardGbc);
+
+        cardGbc.insets = new java.awt.Insets(0, 50, 15, 50); 
+        loginCard.add(createIconTextField("/assets/icon_user.png", "Enter your username", false), cardGbc);
+
+        cardGbc.insets = new java.awt.Insets(0, 50, 5, 50);
+        javax.swing.JLabel passLabel = new javax.swing.JLabel("Password");
+        passLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 12));
+        passLabel.setForeground(new Color(80, 80, 80));
+        loginCard.add(passLabel, cardGbc);
+
+        cardGbc.insets = new java.awt.Insets(0, 50, 20, 50);
+        loginCard.add(createIconTextField("/assets/icon_lock.png", "••••••••", true), cardGbc);
+        
 
         getContentPane().add(leftPanel);
         getContentPane().add(rightPanel);
