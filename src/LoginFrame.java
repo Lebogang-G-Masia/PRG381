@@ -20,6 +20,10 @@ import javax.swing.BorderFactory;
 
 public class LoginFrame extends javax.swing.JFrame {
 
+    private javax.swing.JTextField txtUsername;
+    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JButton btnLogin;
+
     /**
      * Creates new form LoginFrame
      */
@@ -28,7 +32,7 @@ public class LoginFrame extends javax.swing.JFrame {
         setupBaseLayout();
     }
     
-    private javax.swing.JPanel createIconTextField(String iconPath, String placeholderText, boolean isPassword) {
+    private javax.swing.JPanel createIconTextField(String iconPath, String placeholderText, javax.swing.JTextField textField) {
         RoundedPanel wrapper = new RoundedPanel(15, Color.WHITE, false);
         wrapper.setLayout(new java.awt.BorderLayout(10, 0)); 
         
@@ -46,13 +50,6 @@ public class LoginFrame extends javax.swing.JFrame {
             iconLabel.setIcon(new javax.swing.ImageIcon(scaledImg));
         }
         wrapper.add(iconLabel, java.awt.BorderLayout.WEST);
-
-        javax.swing.JTextField textField;
-        if (isPassword) {
-            textField = new javax.swing.JPasswordField();
-        } else {
-            textField = new javax.swing.JTextField();
-        }
         
         textField.setBorder(null);
         textField.setOpaque(false);
@@ -200,7 +197,8 @@ public class LoginFrame extends javax.swing.JFrame {
         loginCard.add(userLabel, cardGbc);
 
         cardGbc.insets = new java.awt.Insets(0, 50, 15, 50); 
-        loginCard.add(createIconTextField("/assets/icon_user.png", "Enter your username", false), cardGbc);
+        txtUsername = new javax.swing.JTextField();
+        loginCard.add(createIconTextField("/assets/icon_user.png", "Enter your username", txtUsername), cardGbc);
 
         cardGbc.insets = new java.awt.Insets(0, 50, 5, 50);
         javax.swing.JLabel passLabel = new javax.swing.JLabel("Password");
@@ -209,7 +207,42 @@ public class LoginFrame extends javax.swing.JFrame {
         loginCard.add(passLabel, cardGbc);
 
         cardGbc.insets = new java.awt.Insets(0, 50, 20, 50);
-        loginCard.add(createIconTextField("/assets/icon_lock.png", "••••••••", true), cardGbc);
+        txtPassword = new javax.swing.JPasswordField();
+        loginCard.add(createIconTextField("/assets/icon_lock.png", "••••••••", txtPassword), cardGbc);
+
+        // Login Button
+        cardGbc.insets = new java.awt.Insets(10, 50, 20, 50);
+        btnLogin = new javax.swing.JButton("Login");
+        btnLogin.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
+        btnLogin.setForeground(Color.WHITE);
+        btnLogin.setBackground(new Color(40, 150, 255)); // Matching gradient style color
+        btnLogin.setFocusPainted(false);
+        btnLogin.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLogin.setPreferredSize(new java.awt.Dimension(300, 45));
+        
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String user = txtUsername.getText();
+                String pass = new String(txtPassword.getPassword());
+                
+                if (user.isEmpty() || pass.isEmpty()) {
+                    javax.swing.JOptionPane.showMessageDialog(LoginFrame.this, "Please enter both username and password.", "Login Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                
+                dao.UserDao userDao = new dao.UserDao();
+                model.User authenticatedUser = userDao.login(user, pass);
+                
+                if (authenticatedUser != null) {
+                    LoginFrame.this.dispose();
+                    new DashboardFrame(authenticatedUser).setVisible(true);
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(LoginFrame.this, "Invalid username or password.", "Login Failed", javax.swing.JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        loginCard.add(btnLogin, cardGbc);
         
 
         getContentPane().add(leftPanel);
