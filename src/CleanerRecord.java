@@ -1,4 +1,5 @@
 public class CleanerRecord {
+
     private final int id;
     private final String name;
 
@@ -16,9 +17,14 @@ public class CleanerRecord {
     }
 
     @Override
-    return String.format("Cleaner Record {\n" +
-                    "\t ID: %d,\n" +
-                    "\t Name: %s\n" +
-                    "}", this.id, this.name);
+    public String toString() {
+        return String.format(
+                "Cleaner Record {\n" +
+                "\tID: %d,\n" +
+                "\tName: %s\n" +
+                "}",
+                this.id,
+                this.name
+        );
     }
 }
