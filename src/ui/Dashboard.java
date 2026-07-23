@@ -52,6 +52,7 @@ public class Dashboard extends javax.swing.JPanel {
         lblLowStock.setText("Low Stock Items: 0");
 
         btnMaterials.setText("Materials");
+        btnMaterials.addActionListener(this::btnMaterialsActionPerformed);
 
         btnSuppliers.setText("Suppliers");
 
@@ -123,6 +124,11 @@ public class Dashboard extends javax.swing.JPanel {
                 .addGap(50, 50, 50))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnMaterialsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaterialsActionPerformed
+        // Launch the Materials frame
+        new ui.MaterialsFrame().setVisible(true);
+    }//GEN-LAST:event_btnMaterialsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
