@@ -104,4 +104,31 @@ public class CleanerDao {
             return false;
         }
     }
+
+    // Search Cleaners
+    public ArrayList<Cleaner> searchCleaners(String keyword) {
+        ArrayList<Cleaner> cleaners = new ArrayList<>();
+        String sql = "SELECT * FROM cleaners WHERE first_name LIKE ? OR last_name LIKE ? OR email LIKE ? ORDER BY first_name";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pst = conn.prepareStatement(sql)) {
+            String searchPattern = "%" + keyword + "%";
+            pst.setString(1, searchPattern);
+            pst.setString(2, searchPattern);
+            pst.setString(3, searchPattern);
+            try (ResultSet rs = pst.executeQuery()) {
+                while (rs.next()) {
+                    Cleaner cleaner = new Cleaner();
+                    cleaner.setCleanerId(rs.getInt("cleaner_id"));
+                    cleaner.setFirstName(rs.getString("first_name"));
+                    cleaner.setLastName(rs.getString("last_name"));
+                    cleaner.setPhone(rs.getString("phone"));
+                    cleaner.setEmail(rs.getString("email"));
+                    cleaners.add(cleaner);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error searching cleaners: " + e.getMessage());
+        }
+        return cleaners;
+    }
 }

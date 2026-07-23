@@ -104,4 +104,32 @@ public class SupplierDao {
             return false;
         }
     }
+
+    // Search Suppliers
+    public ArrayList<Supplier> searchSuppliers(String keyword) {
+        ArrayList<Supplier> suppliers = new ArrayList<>();
+        String sql = "SELECT * FROM suppliers WHERE company_name LIKE ? OR contact_person LIKE ? OR email LIKE ? ORDER BY company_name";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pst = conn.prepareStatement(sql)) {
+            String searchPattern = "%" + keyword + "%";
+            pst.setString(1, searchPattern);
+            pst.setString(2, searchPattern);
+            pst.setString(3, searchPattern);
+            try (ResultSet rs = pst.executeQuery()) {
+                while (rs.next()) {
+                    Supplier supplier = new Supplier();
+                    supplier.setSupplierId(rs.getInt("supplier_id"));
+                    supplier.setSupplierName(rs.getString("company_name"));
+                    supplier.setContactPerson(rs.getString("contact_person"));
+                    supplier.setPhone(rs.getString("phone"));
+                    supplier.setEmail(rs.getString("email"));
+                    supplier.setAddress(rs.getString("address"));
+                    suppliers.add(supplier);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error searching suppliers: " + e.getMessage());
+        }
+        return suppliers;
+    }
 }
