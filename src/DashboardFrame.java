@@ -219,14 +219,18 @@ public class DashboardFrame extends JFrame {
             mainContentPanel.add(errorPanel, "Issue Stock");
         }
 
-        // 3. Settings View Card
-        JPanel settingsPanel = new JPanel();
-        settingsPanel.setOpaque(false);
-        JLabel settingsLbl = new JLabel("Settings module under construction...");
-        settingsLbl.setFont(new Font("Segoe UI", Font.ITALIC, 16));
-        settingsLbl.setForeground(Color.GRAY);
-        settingsPanel.add(settingsLbl);
-        mainContentPanel.add(settingsPanel, "Settings");
+        // 4. Settings View Card
+        try {
+            ui.SettingsFrame settingsFrame = new ui.SettingsFrame(currentUser);
+            JPanel settingsPanel = new JPanel(new BorderLayout());
+            settingsPanel.setOpaque(false);
+            settingsPanel.add(settingsFrame.getContentPane(), BorderLayout.CENTER);
+            mainContentPanel.add(settingsPanel, "Settings");
+        } catch (Exception e) {
+            JPanel errorPanel = new JPanel();
+            errorPanel.add(new JLabel("Error loading Settings view."));
+            mainContentPanel.add(errorPanel, "Settings");
+        }
 
         centerPanel.add(mainContentPanel, BorderLayout.CENTER);
         add(centerPanel, BorderLayout.CENTER);
