@@ -151,7 +151,7 @@ public class LoginFrame extends javax.swing.JFrame {
         rightPanel.setLayout(new GridBagLayout()); 
         
         RoundedPanel loginCard = new RoundedPanel(20, Color.WHITE, false);
-        loginCard.setPreferredSize(new java.awt.Dimension(450, 550));
+        loginCard.setPreferredSize(new java.awt.Dimension(450, 600));
         loginCard.setBorder(javax.swing.BorderFactory.createEmptyBorder()); 
         loginCard.setCustomBorder(new Color(230, 230, 230), 1);
         rightPanel.add(loginCard);
@@ -243,6 +243,24 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
         loginCard.add(btnLogin, cardGbc);
+        
+        cardGbc.insets = new java.awt.Insets(0, 50, 20, 50);
+        javax.swing.JButton btnOpenRegister = new javax.swing.JButton("Create an Account");
+        btnOpenRegister.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
+        btnOpenRegister.setForeground(new Color(40, 150, 255));
+        btnOpenRegister.setBackground(Color.WHITE);
+        btnOpenRegister.setFocusPainted(false);
+        btnOpenRegister.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(40, 150, 255), 1, true));
+        btnOpenRegister.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnOpenRegister.setPreferredSize(new java.awt.Dimension(300, 45));
+        
+        btnOpenRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoginFrame.this.dispose();
+                new RegistrationFrame().setVisible(true);
+            }
+        });
+        loginCard.add(btnOpenRegister, cardGbc);
         
 
         getContentPane().add(leftPanel);

@@ -49,6 +49,23 @@ public class UserDao {
 
     }
 
+    public boolean register(User user) {
+        String sql = "INSERT INTO users (first_name, last_name, username, email, password, role) VALUES (?, ?, ?, ?, ?, ?)";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pst = conn.prepareStatement(sql)) {
+            pst.setString(1, user.getFirstName());
+            pst.setString(2, user.getLastName());
+            pst.setString(3, user.getUsername());
+            pst.setString(4, user.getEmail());
+            pst.setString(5, user.getPassword());
+            pst.setString(6, user.getRole() != null && !user.getRole().isEmpty() ? user.getRole() : "Staff");
+            return pst.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
     public boolean updateProfile(User user) {
         String sql = "UPDATE users SET first_name=?, last_name=?, email=? WHERE user_id=?";
         try (Connection conn = DatabaseConnection.getConnection();
