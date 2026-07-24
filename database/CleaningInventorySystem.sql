@@ -403,6 +403,11 @@ COPY public.suppliers (supplier_id, company_name, contact_person, phone, email, 
 
 COPY public.users (user_id, first_name, last_name, username, email, password, role, created_at) FROM stdin;
 1	Admin	User	admin	admin@cleaning.com	admin123	Admin	2026-07-20 23:17:59.218478
+2	Masia	User	Masia	masia@cleaning.com	masia123	Staff	2026-07-24 16:21:00.000000
+3	Tshege	User	Tshege	tshege@cleaning.com	tshege123	Staff	2026-07-24 16:21:00.000000
+4	Dewald	User	Dewald	dewald@cleaning.com	dewald123	Staff	2026-07-24 16:21:00.000000
+5	Hendrik	User	Hendrik	hendrik@cleaning.com	honi123	Staff	2026-07-24 16:21:00.000000
+6	Zander	User	Zander	zander@cleaning.com	zander123	Staff	2026-07-24 16:21:00.000000
 \.
 
 
@@ -457,7 +462,7 @@ SELECT pg_catalog.setval('public.suppliers_supplier_id_seq', 6, true);
 -- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.users_user_id_seq', 1, true);
+SELECT pg_catalog.setval('public.users_user_id_seq', 6, true);
 
 
 --
