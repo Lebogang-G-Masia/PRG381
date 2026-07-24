@@ -397,7 +397,12 @@ INSERT INTO public.suppliers (supplier_id, company_name, contact_person, phone, 
 --
 
 INSERT INTO public.users (user_id, first_name, last_name, username, email, password, role, created_at) VALUES 
-(1, 'Admin', 'User', 'admin', 'admin@cleaning.com', 'admin123', 'Admin', '2026-07-20 23:17:59.218478');
+(1, 'Admin', 'User', 'admin', 'admin@cleaning.com', 'admin123', 'Admin', '2026-07-20 23:17:59.218478'),
+(2, 'Masia', 'Member', 'Masia', 'masia@demo.com', 'masia123', 'Admin', '2026-07-20 23:17:59.218478'),
+(3, 'Tshege', 'Member', 'Tshege', 'tshege@demo.com', 'tshege123', 'Admin', '2026-07-20 23:17:59.218478'),
+(4, 'Dewald', 'Member', 'Dewald', 'dewald@demo.com', 'dewald123', 'Admin', '2026-07-20 23:17:59.218478'),
+(5, 'Hendrik', 'Member', 'Hendrik', 'hendrik@demo.com', 'honi123', 'Admin', '2026-07-20 23:17:59.218478'),
+(6, 'Zander', 'Member', 'Zander', 'zander@demo.com', 'zander123', 'Admin', '2026-07-20 23:17:59.218478');
 
 
 --
@@ -451,7 +456,7 @@ SELECT pg_catalog.setval('public.suppliers_supplier_id_seq', 6, true);
 -- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.users_user_id_seq', 1, true);
+SELECT pg_catalog.setval('public.users_user_id_seq', 6, true);
 
 
 --
