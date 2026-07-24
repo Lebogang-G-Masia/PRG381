@@ -3,7 +3,6 @@
 --
 
 -- Removed restrict
-
 -- Dumped from database version 18.4
 -- Dumped by pg_dump version 18.4
 
@@ -335,7 +334,7 @@ ALTER TABLE ONLY public.users ALTER COLUMN user_id SET DEFAULT nextval('public.u
 -- Data for Name: cleaners; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.cleaners (cleaner_id, first_name, last_name, phone, email, created_at) VALUES 
+INSERT INTO public.cleaners (cleaner_id, first_name, last_name, phone, email, created_at) VALUES
 (1, 'John', 'Smith', '0821111111', 'john@cleaning.co.za', '2026-07-20 23:23:43.726687'),
 (2, 'Sarah', 'Brown', '0822222222', 'sarah@cleaning.co.za', '2026-07-20 23:23:43.726687'),
 (3, 'David', 'Jones', '0823333333', 'david@cleaning.co.za', '2026-07-20 23:23:43.726687');
@@ -347,7 +346,7 @@ INSERT INTO public.cleaners (cleaner_id, first_name, last_name, phone, email, cr
 -- Data for Name: materials; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.materials (material_id, material_name, description, quantity, reorder_level, unit, supplier_id, created_at) VALUES 
+INSERT INTO public.materials (material_id, material_name, description, quantity, reorder_level, unit, supplier_id, created_at) VALUES
 (2, 'Floor Mop', 'Cotton Floor Mop', 25, 5, 'Each', 2, '2026-07-20 23:25:14.659832'),
 (3, 'Rubber Gloves', 'Medium Size', 100, 20, 'Pair', 3, '2026-07-20 23:25:14.659832'),
 (4, 'Bucket', '20L Plastic Bucket', 30, 5, 'Each', 2, '2026-07-20 23:25:14.659832'),
@@ -361,7 +360,7 @@ INSERT INTO public.materials (material_id, material_name, description, quantity,
 -- Data for Name: stock_issuance; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.stock_issuance (issuance_id, cleaner_id, issued_by, issue_date) VALUES 
+INSERT INTO public.stock_issuance (issuance_id, cleaner_id, issued_by, issue_date) VALUES
 (1, 1, 1, '2026-07-21 00:45:26.143739');
 
 
@@ -371,7 +370,7 @@ INSERT INTO public.stock_issuance (issuance_id, cleaner_id, issued_by, issue_dat
 -- Data for Name: stock_issuance_details; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.stock_issuance_details (detail_id, issuance_id, material_id, quantity) VALUES 
+INSERT INTO public.stock_issuance_details (detail_id, issuance_id, material_id, quantity) VALUES
 (1, 1, 1, 5);
 
 
@@ -381,7 +380,7 @@ INSERT INTO public.stock_issuance_details (detail_id, issuance_id, material_id, 
 -- Data for Name: suppliers; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.suppliers (supplier_id, company_name, contact_person, phone, email, address, created_at) VALUES 
+INSERT INTO public.suppliers (supplier_id, company_name, contact_person, phone, email, address, created_at) VALUES
 (1, 'Sparkle Supplies', 'Sarah Johnson', '011-555-1234', 'sarah@sparkle.co.za', '15 Main Road, Johannesburg', '2026-07-20 23:18:34.605479'),
 (2, 'CleanPro Distributors', 'Michael Adams', '021-555-9876', 'michael@cleanpro.co.za', '22 Beach Road, Cape Town', '2026-07-20 23:18:34.605479'),
 (3, 'Eco Cleaning Solutions', 'Amanda Smith', '031-555-4567', 'amanda@eco.co.za', '8 King Street, Durban', '2026-07-20 23:18:34.605479'),
@@ -396,8 +395,13 @@ INSERT INTO public.suppliers (supplier_id, company_name, contact_person, phone, 
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.users (user_id, first_name, last_name, username, email, password, role, created_at) VALUES 
-(1, 'Admin', 'User', 'admin', 'admin@cleaning.com', 'admin123', 'Admin', '2026-07-20 23:17:59.218478');
+INSERT INTO public.users (user_id, first_name, last_name, username, email, password, role, created_at) VALUES
+(1, 'Admin', 'User', 'admin', 'admin@cleaning.com', 'admin123', 'Admin', '2026-07-20 23:17:59.218478'),
+(2, 'Lebogang', 'Masia', 'Masia', 'masia@cleaning.com', 'masia123', 'Staff', '2026-07-24 16:21:00.000000'),
+(3, 'Tshegetsanang', 'Nkgwatau', 'Tshege', 'tshege@cleaning.com', 'tshege123', 'Staff', '2026-07-24 16:21:00.000000'),
+(4, 'Dewald', 'Allers', 'Dewald', 'dewald@cleaning.com', 'dewald123', 'Staff', '2026-07-24 16:21:00.000000'),
+(5, 'Hendrik', 'Honiball', 'Hendrik', 'hendrik@cleaning.com', 'honi123', 'Staff', '2026-07-24 16:21:00.000000'),
+(6, 'Zander', 'De Groote', 'Zander', 'zander@cleaning.com', 'zander123', 'Staff', '2026-07-24 16:21:00.000000');
 
 
 --
@@ -451,7 +455,7 @@ SELECT pg_catalog.setval('public.suppliers_supplier_id_seq', 6, true);
 -- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.users_user_id_seq', 1, true);
+SELECT pg_catalog.setval('public.users_user_id_seq', 6, true);
 
 
 --
@@ -596,4 +600,3 @@ ALTER TABLE ONLY public.stock_issuance
 --
 
 -- Removed unrestrict
-
